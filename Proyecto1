@@ -1,0 +1,166 @@
+class Inventario:
+    def __init__(self):
+        self.Cabeza= None
+    def Menu(self):
+        while True:
+            print("\n--- Menú Principal ---")
+            print("1. Ver productos")
+            print("2. Agregar producto")
+            print("3. Eliminar producto")
+            print("4. Modificar producto (Nombre)")
+            print("5. Modificar producto (Cantidad) ")
+            print("6. Modificar producto (Precio) ")
+            print("7. Vaciar inventario")
+            print("8. Buscar producto.")
+            print("9. Salir")
+            
+            opcion = input("Selecciona una opción: ")
+            
+            if opcion == "1":
+                print("Mostrando productos...")
+                Inventario.Mostrar_Productos()
+            elif opcion == "2":
+                print("Agregando producto...")
+                id= int(input("Ingrese el ID: "))
+                Nombre= input("Ingrese su nombre: ")
+                Precio= int(input("Ingrese el precio: "))
+                Cantidad= int(input("Ingrese la cantidad: "))
+                Inventario.Agregar_Producto(id,Nombre,Precio,Cantidad)
+            elif opcion == "3":
+                id= int(input("Ingrese el ID: "))
+                Inventario.Eliminar_Producto(id,)
+            elif opcion == "4":
+                id= int(input("Ingrese el ID: "))
+                Nombre= input("Ingrese su nombre: ")
+                Inventario.Cambiar_Nombre(id,Nombre)
+            elif opcion == "5":
+                id= int(input("Ingrese el ID: "))
+                Cantidad= int(input("Ingrese la cantidad: "))
+                Inventario.Cambiar_Cantidad(id, Cantidad)
+            elif opcion == "6":
+                id= int(input("Ingrese el ID: "))
+                Precio= int(input("Ingrese la cantidad: "))
+                Inventario.Cambiar_Precio(id,Precio)
+            elif opcion == "7":
+                Inventario.Vaciar_Inventario()
+            elif opcion == "8":
+                id= int(input("Ingrese el ID: "))
+                Inventario.Buscar_Producto(id)
+            elif opcion == "9":
+                print("Saliendo del programa...")
+                break
+            else:
+                print("Opción no válida. Intenta de nuevo.")
+
+
+    def Mostrar_Productos(self):
+        Nodo_Actual = self.Cabeza
+        while Nodo_Actual:
+            print(f"IDENTIFICADOR: {Nodo_Actual.id} ") 
+            print(f"NOMBRE: {Nodo_Actual.Nombre} ") 
+            print(f"CANTIDAD: {Nodo_Actual.Cantidad} ")
+            print(f"PRECIO: ${Nodo_Actual.Precio} c/u \n")
+            Nodo_Actual = Nodo_Actual.Siguiente
+        if self.Cabeza == None:
+            print("NO HAY PRODUCTOS. ")
+
+    def Agregar_Producto(self, Nombre, id, Cantidad, Precio):
+        nuevo_nodo = Nodo(Nombre, id, Precio, Cantidad)
+        if self.Cabeza == None:
+            self.Cabeza= nuevo_nodo
+        else:
+            Nodo_Actual= self.Cabeza
+            while Nodo_Actual.Siguiente:
+                Nodo_Actual = Nodo_Actual.Siguiente
+            Nodo_Actual.Siguiente = nuevo_nodo
+
+    def Eliminar_Producto(self, id):
+        Nodo_Actual= self.Cabeza
+        Anterior= None
+        while Nodo_Actual != None:
+            if Nodo_Actual.id == id:
+                if Anterior == None:
+                    self.Cabeza = Nodo_Actual.Siguiente 
+                    print("NODO ELIMINADO.")
+                else:
+                    Anterior.Siguiente = Nodo_Actual.Siguiente
+                    print("NODO ELIMINADO.")
+                return
+            Anterior= Nodo_Actual
+            Nodo_Actual = Nodo_Actual.Siguiente
+        print("NO HAY PRODUCTOS.")
+
+    def Vaciar_Inventario(self):
+        self.Cabeza = None
+        
+    def Buscar_Producto(self, id):
+        Nodo_Actual = self.Cabeza
+        while Nodo_Actual:
+            if Nodo_Actual.id == id:
+                print(f"IDENTIFICADOR: {Nodo_Actual.id} ") 
+                print(f"NOMBRE: {Nodo_Actual.Nombre} ") 
+                print(f"CANTIDAD: {Nodo_Actual.Cantidad} ")
+                print(f"PRECIO: ${Nodo_Actual.Precio} c/u \n")
+                return
+            Nodo_Actual = Nodo_Actual.Siguiente
+        print("NO EXISTE.")
+
+    def Cambiar_Nombre(self, id, Nombre):
+        Nodo_Actual = self.Cabeza
+        while Nodo_Actual:
+            if Nodo_Actual.id == id:
+                Nodo_Actual.Nombre= Nombre
+                print(f"IDENTIFICADOR: {Nodo_Actual.id} ") 
+                print(f"NOMBRE: {Nodo_Actual.Nombre} ") 
+                print(f"CANTIDAD: {Nodo_Actual.Cantidad} ")
+                print(f"PRECIO: ${Nodo_Actual.Precio} c/u \n")
+                return
+            Nodo_Actual = Nodo_Actual.Siguiente
+        print("NO EXISTE.")
+
+    def Cambiar_Cantidad(self, id, Cantidad):
+        Nodo_Actual = self.Cabeza
+        while Nodo_Actual:
+            if Nodo_Actual.id == id:
+                Nodo_Actual.Cantidad= Cantidad
+                print(f"IDENTIFICADOR: {Nodo_Actual.id} ") 
+                print(f"NOMBRE: {Nodo_Actual.Nombre} ") 
+                print(f"CANTIDAD: {Nodo_Actual.Cantidad} ")
+                print(f"PRECIO: ${Nodo_Actual.Precio} c/u \n")
+                return
+            Nodo_Actual = Nodo_Actual.Siguiente
+        print("NO EXISTE.")
+
+    def Cambiar_Precio(self, id, Precio):
+        Nodo_Actual = self.Cabeza
+        while Nodo_Actual:
+            if Nodo_Actual.id == id:
+                Nodo_Actual.Precio= Precio
+                print(f"IDENTIFICADOR: {Nodo_Actual.id} ") 
+                print(f"NOMBRE: {Nodo_Actual.Nombre} ") 
+                print(f"CANTIDAD: {Nodo_Actual.Cantidad} ")
+                print(f"PRECIO: ${Nodo_Actual.Precio} c/u \n")
+                return
+            Nodo_Actual = Nodo_Actual.Siguiente
+        print("NO EXISTE. ")
+
+
+
+class Nodo:
+    def __init__(self, id, Nombre, Cantidad, Precio):
+        self.id = id
+        self.Nombre= Nombre
+        self.Precio = Precio
+        self.Cantidad = Cantidad
+        self.Siguiente= None
+
+if __name__ == "__main__":
+    Inventario  = Inventario()
+
+Inventario.Agregar_Producto(1, "Pan", 15, 25)
+Inventario.Agregar_Producto(2, "Leche", 8, 20)
+Inventario.Agregar_Producto(3, "Arroz", 12, 18)
+Inventario.Agregar_Producto(4, "Huevos", 30, 50)
+Inventario.Agregar_Producto(5, "Queso", 5, 80)
+
+Inventario.Menu()
